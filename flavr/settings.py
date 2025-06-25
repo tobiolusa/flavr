@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'djoser',
     'rest_framework_simplejwt',
+    'drf_spectacular',
 ]
 
 MIDDLEWARE = [
@@ -91,8 +92,16 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES' : (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
+    'DEFAULT_SCHEMA_CLASS' : 'drf_spectacular.openapi.AutoSchema',
 }
 
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Flavr API',
+    'DESCRIPTION': 'Flavr is a RESTful API built with Django and Django REST Framework that allows users to create, explore, and manage a collection of food recipes.',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    # OTHER SETTINGS
+}
 DJOSER = {
     
     'LOGIN_FIELD' : 'username',
@@ -119,7 +128,7 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'olusamiracle@gmail.com'
 EMAIL_HOST_PASSWORD = 'srhw kbdk wkti uwck'  # 16-character App Password
-DEFAULT_FROM_EMAIL = 'olusamiracle@gmail.com'
+DEFAULT_FROM_EMAIL = 'info@flavr.com'
 
 
 
