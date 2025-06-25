@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     ## Third Party Libraies 
     'rest_framework',
     'djoser',
+    'rest_framework_simplejwt',
 ]
 
 MIDDLEWARE = [
@@ -88,9 +89,39 @@ DATABASES = {
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES' : (
-        'rest_framework'
-    )
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
 }
+
+DJOSER = {
+    
+    'LOGIN_FIELD' : 'username',
+    'USER_CREATE_PASSWORD_RETYPE' : True,
+    'SEND_ACTIVATION_EMAIL' : True,
+    'SERIALIZERS' : {
+        'user_create' : 'djoser.serializers.CustomUserCreateSerializer',
+        'user' : 'djoser.serializers.UserSerializer',
+        'current_user' : 'djoser.serializers.UserSerializer',
+    },
+    'ACTIVATION_URL': 'activate/{uid}/{token}',
+    'PASSWORD_RESET_CONFIRM_URL': 'password/reset/confirm/{uid}/{token}',
+    'SITE_NAME': 'Flavr',
+    'DOMAIN': 'localhost:8000',  #
+}
+
+SIMPLE_JWT = {
+    'AUTH_HEADER_TYPES' : ('bearer'),
+}
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'olusamiracle@gmail.com'
+EMAIL_HOST_PASSWORD = 'srhw kbdk wkti uwck'  # 16-character App Password
+DEFAULT_FROM_EMAIL = 'olusamiracle@gmail.com'
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
